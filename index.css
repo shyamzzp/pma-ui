@@ -1,0 +1,32 @@
+.list-block ul:after {
+    content: none;
+}
+
+.list-block ul:before {
+    content: none;
+}
+
+.swipeout{
+	margin: 10px;background-color: #fff;border-radius: 10px;
+}
+.list-block {
+    margin: 25px 0;
+}
+.searchbar {
+    height: 56px;
+    padding: 0px 10px;
+    background: #efeff4;
+    margin-top: 5px;
+    /*border-radius: 6px;
+    border-style: solid;
+    border-color: #c9c9ce;
+    border-width: 1px;*/
+}
+.searchbar:after {
+	content:none;
+}
+.searchbar:before {
+	content:none;
+}
+.searchbar .searchbar-input {
+    height: 48px;}

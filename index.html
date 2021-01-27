@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width = device-width, initial-scale = 1, 
+         maximum-scale = 1, minimum-scale = 1, user-scalable = no, minimal-ui" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>Swipe To Delete</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.2/css/framework7.ios.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.2/css/framework7.ios.colors.min.css" />
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", startup);
+
+    function startup() {
+        var elm1 = document.getElementById('link');
+        var timeout;
+        var lastTap = 0;
+        elm1.addEventListener('touchend', function(event) {
+            var currentTime = new Date().getTime();
+            var tapLength = currentTime - lastTap;
+            clearTimeout(timeout);
+            var myApp = new Framework7();
+            var $$ = Dom7;
+            if (tapLength < 500 && tapLength > 0) {
+                myApp.confirm('Search Related to this Question', 'Please Confirm', function() {});
+                event.preventDefault();
+            } else {
+                event.preventDefault();
+                timeout = setTimeout(function() {
+                    clearTimeout(timeout);
+                }, 500);
+            }
+            lastTap = currentTime;
+        });
+
+
+
+    }
+
+    function gesture_not_supported(event) {
+        alert(JSON.stringify(event))
+    }
+
+    function process_touchstart(ev) {
+        switch (ev.touches.length) {
+            case 1:
+                break;
+            case 2:
+                alert("Double Tap");
+            case 3:
+                break;
+            default:
+                gesture_not_supported(ev);
+                break;
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div class="views">
+        <div class="view view-main">
+            <div class="pages">
+                <div data-page="home" class="page">
+                    <!-- <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="left"> </div>
+                            <div class="center">People May Ask</div>
+                            <div class="right"> </div>
+                        </div>
+                    </div> -->
+                    <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
+                        <div class="searchbar-input">
+                            <input type="search" placeholder="Search"><a href="#" class="searchbar-clear"></a>
+                        </div>
+                        <a href="#" class="searchbar-cancel">Cancel</a>
+                    </form>
+                    <div class="page-content">
+                        <div class="searchbar-backdrop"></div>
+                        <!-- <div class="content-block-title">With auto close on cancel</div> -->
+                        <div class="list-block">
+                            <ul style="background-color: #efeff4">
+                                <li class="swipeout">
+                                    <div class="swipeout-content">
+                                        <a href="#" id="link" class="item-link item-content" data-confirm="Are you sure you want to delete this item?">
+                                            <div class="item-inner" style="display: block;">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">Is it bad to have coffee everyday?</div>
+                                                </div>
+                                                <!-- <div class="item-subtitle">Is it bad to have coffee everyday?</div> -->
+                                                <div class="item-text" style="height: fit-content;-webkit-line-clamp: 100;">Like so many foods and nutrients, too much coffee can cause problems, especially in the digestive tract. But studies have shown that drinking up to four 8-ounce cups of coffee per day is safe. Sticking to those boundaries shouldn't be hard for coffee drinkers in the U.S., since most drink just a cup of java per day.May 5, 2017</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="swipeout-actions-left">
+                                        <a href="#" class="color-green swipeout-overswipe" @click=${reply}>Reply</a>
+                                        <a href="#" class="color-blue" @click=${forward}>Forward</a>
+                                    </div>
+                                    <div class="swipeout-actions-right">
+                                        <a href="#" @click=${more}>More</a>
+                                        <a href="#" class="color-orange" @click=${mark}>Mark</a>
+                                        <a href="#" data-confirm="Are you sure you want to delete this item?" class="swipeout-delete swipeout-overswipe">Delete</a>
+                                    </div>
+                                </li>
+                                <li class="swipeout">
+                                    <div class="swipeout-content">
+                                        <a href="#" id="link" class="item-link item-content" data-confirm="Are you sure you want to delete this item?">
+                                            <div class="item-inner" style="display: block;">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">Is coffee good for your health?</div>
+                                                </div>
+                                                <!-- <div class="item-subtitle">Is coffee good for your health?</div> -->
+                                                <div class="item-text" style="height: fit-content;-webkit-line-clamp: 100;">Not only can your daily cup of joe help you feel more energized, burn fat and improve physical performance, it may also lower your risk of several conditions, such as type 2 diabetes, cancer and Alzheimer's and Parkinson's disease. In fact, coffee may even boost longevity.Sep 20, 2018"</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="swipeout-actions-left">
+                                        <a href="#" class="color-green swipeout-overswipe" @click=${reply}>Reply</a>
+                                        <a href="#" class="color-blue" @click=${forward}>Forward</a>
+                                    </div>
+                                    <div class="swipeout-actions-right">
+                                        <a href="#" @click=${more}>More</a>
+                                        <a href="#" class="color-orange" @click=${mark}>Mark</a>
+                                        <a href="#" data-confirm="Are you sure you want to delete this item?" class="swipeout-delete swipeout-overswipe">Delete</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.2/js/framework7.min.js"></script>
+    <script>
+    var myApp = new Framework7();
+
+    var $$ = Dom7;
+
+    $$('.task1').on('click', function() {
+        myApp.alert('Task 1 Clicked !!');
+    });
+    </script>
+</body>
+
+</html>
